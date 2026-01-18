@@ -1,0 +1,1348 @@
+/* 1. Reset e Base */
+    body { 
+        background-color: #000000; 
+        color: #fff; 
+        margin: 0; 
+        font-family: 'Arial Black', sans-serif; 
+        overflow-x: hidden;
+    }
+    html {
+    scroll-behavior: smooth;
+}
+
+    /* 2. Container Principal */
+    .hero {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        background: radial-gradient(circle, #000000 0%, #000 100%);
+    }
+
+    /* 3. Texto Centralizado (Z-index alto para ficar na frente) */
+    .hero-text {
+        position: absolute;
+        z-index: 10;
+        text-align: center;
+        pointer-events: none;
+        mix-blend-mode: normal;
+    }
+
+    .hero-text h1 {
+    font-size: clamp(3rem, 15vw, 10rem);
+    letter-spacing: -5px;
+    text-transform: uppercase;
+    margin: 0;
+    line-height: 0.8;
+    color: #ffffff; /* Garante que o texto seja branco */
+    /* Esse efeito abaixo cria o 'aura' roxa sem o verde */
+    text-shadow: 
+        0 0 10px rgba(138, 43, 226, 0.8), 
+        0 0 20px rgba(138, 43, 226, 0.4),
+        0 0 40px rgba(0, 0, 0, 0.6);
+    }
+
+    .hero-text p {
+        font-family: 'Courier New', monospace;
+        letter-spacing: 8px;
+        color: #8a2be2;
+        font-size: 1.2rem;
+        margin-top: 10px;
+    }
+
+    /* 4. Grid de Fotos */
+    .grid-container {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 15px;
+        width: 95%;
+        height: 75vh;
+        align-items: center;
+        z-index: 1;
+    }
+
+    .foto {
+        height: 100%;
+        border-radius: 4px;
+        background-size: cover;
+        background-position: center;
+        filter: grayscale(80%) brightness(0.7); /* Vibe urbana e sombria */
+        border: 1px solid rgb(0, 0, 0);
+        transition: transform 0.1s ease-out, filter 0.4s ease, border 0.4s ease;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    }
+
+    /* Interação: Foto ganha vida no hover */
+    .foto:hover {
+        filter: grayscale(0%) brightness(1);
+        border: 1px solid #8a2be2;
+        z-index: 5;
+    }
+
+    /* 5. Alturas e Imagens (Substitua os links abaixo pelas fotos reais depois) */
+    .item-1 { 
+        height: 55%; 
+        background-image: url('imagens/foto1.jpg'); 
+    }
+    .item-2 { 
+        height: 80%; 
+        background-image: url('imagens/foto2.jpg'); 
+    }
+    .item-3 { 
+   height: 100%; 
+    background-image: url('imagens/foto4.jpg'); 
+    background-position: 43% center; /* Mantém a centralização que achamos */
+    /* REMOVEMOS o filter e o brightness fixos daqui */
+    border: 1px solid rgba(138, 43, 226, 0.5); /* Borda sutil */
+    z-index: 2;
+    }
+
+    .item-4 { 
+        height: 85%; 
+        background-image: url('imagens/foto3.jpg'); 
+    }
+    .item-5 { 
+        height: 60%; 
+        background-image: url('imagens/foto5.jpg'); 
+    }
+
+    /* 6. SEÇÃO AGENDA */
+.agenda-container {
+    background-color: #000;
+    padding: 80px 5%;
+    display: flex;
+    justify-content: center;
+    border-top: 1px solid transparent; /* Base da borda */
+    border-image: linear-gradient(to right, transparent, #c88eff, transparent) 1;
+    padding-top: 100px; /* Espaço para a linha não ficar colada nas fotos */
+}
+
+.agenda-wrapper {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr; /* Vídeo maior que a agenda */
+    gap: 30px;
+    max-width: 1200px;
+    width: 100%;
+}
+
+/* Estilo do Vídeo */
+.agenda-video {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    height: 470px;
+    background: #000;
+}
+
+.agenda-video iframe {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    transform: translate(-50%, -50%) scale(1.3); /* O scale 1.3 remove as bordas pretas do player */
+    pointer-events: none; /* Evita que a pessoa pause o vídeo sem querer */
+}
+
+.video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3); /* Escurece um pouco o clipe para a agenda brilhar */
+    z-index: 2;
+}
+
+/* Estilo da Agenda Discreta */
+.agenda-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 30px;
+}
+
+.agenda-header h2 {
+    font-size: 1.8rem;
+    letter-spacing: 1px;
+    margin: 0;
+}
+
+.show-all {
+    color: #888;
+    text-decoration: none;
+    font-size: 0.8rem;
+}
+
+/* Cards de Evento */
+.event-card {
+    background: rgba(255, 255, 255, 0.03);
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+    transition: 0.3s;
+}
+
+.event-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.event-date {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-right: 20px;
+    margin-right: 20px;
+    border-right: 2px solid #8a2be2; /* Linha roxa lateral igual da imagem */
+    min-width: 60px;
+}
+
+.event-date.blue-tag { border-right-color: #00d4ff; } /* Variação de cor */
+
+.day { font-size: 1.2rem; font-weight: bold; }
+.month { font-size: 0.7rem; color: #888; }
+
+.event-info h3 { font-size: 1rem; margin: 0; }
+.event-info p { font-size: 0.8rem; color: #666; margin: 5px 0 0; }
+
+/* Responsividade: um embaixo do outro no celular */
+@media (max-width: 900px) {
+    .agenda-wrapper { grid-template-columns: 1fr; }
+    .agenda-video { height: 250px; }
+}
+
+/* Responsividade para celular */
+@media (max-width: 768px) {
+    .show-item { flex-direction: column; text-align: center; gap: 20px; }
+    .data { min-width: auto; }
+    .titulo-agenda { font-size: 3rem; }
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 5%;
+    background: rgba(5, 5, 5, 0.8);
+    backdrop-filter: blur(10px); /* Efeito de vidro fosco */
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+}
+
+.logo span { color: #8a2be2; }
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: 0.3s;
+    opacity: 0.7;
+}
+
+.nav-links a:hover { opacity: 1; color: #8a2be2; }
+
+.btn-shop {
+    background-color: #8a2be2;
+    color: white;
+    padding: 10px 80px;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 50px;
+    transition: 0.3s;
+    display: inline-block;
+    margin-left: 20px; /* Dá um pequeno espaço do item CONTATO */
+    font-size: 0.8rem;
+}
+
+.btn-shop:hover {
+    background-color: #fff;
+    color: #8a2be2;
+    box-shadow: 0 0 15px #8a2be2;
+}
+
+.plataformas {
+    background-color: #020202;
+    padding: 50px 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    border-top: 1px solid transparent; /* Base da borda */
+    border-image: linear-gradient(to right, transparent, #c88eff, transparent) 1;
+    padding-top: 100px; /* Espaço para a linha não ficar colada nas fotos */
+}
+
+.logos-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 200px;
+}
+
+.logo-parceiro {
+    height: 80px; /* IMPORTANTE: Sem altura, a imagem não aparece */
+    width: auto;
+    filter: brightness(0) invert(1); /* Deixa branco */
+    opacity: 0.6;
+    transition: 0.3s;
+}
+/* Remove a decoração padrão de link (sublinhado e cor azul) */
+.plataforma-link {
+    text-decoration: none;
+    color: inherit; /* Faz o link herdar a cor branca que já definimos */
+    display: block;
+}
+
+/* Opcional: Adicionar um efeito de brilho quando o mouse passar por cima */
+.plataforma-link:hover .plataforma-item {
+    filter: drop-shadow(0 0 8px rgba(138, 43, 226, 0.8));
+    transform: scale(1.05);
+    transition: all 0.3s ease;
+}
+.som-button {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    z-index: 10;
+    background: rgba(138, 43, 226, 0.8); /* Roxo igual aos detalhes do site */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    font-family: sans-serif;
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+
+.som-button:hover {
+    background: #8a2be2;
+    transform: scale(1.1);
+}
+.video-background {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Faz o vídeo preencher todo o quadrado sem distorcer */
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+/* --- AJUSTE DA AGENDA (SCROLL) --- */
+
+.event-list {
+    max-height: 400px; /* Mesma altura do vídeo para ficarem alinhados */
+    overflow-y: auto;  /* Ativa a rolagem */
+    padding-right: 15px; /* Espaço para a barra não cobrir o texto */
+}
+
+/* Customização da barra de rolagem (Scroll) */
+.event-list::-webkit-scrollbar {
+    width: 5px;
+}
+
+.event-list::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+}
+
+.event-list::-webkit-scrollbar-thumb {
+    background: #8a2be2; /* Roxo padrão do Igão */
+    border-radius: 10px;
+}
+
+/* Suaviza a rolagem no celular */
+.event-list {
+    scrollbar-width: thin;
+    scrollbar-color: #8a2be2 #000;
+}
+.composicoes-section {
+    padding: 10px 0;
+    background: #000;
+    text-align: center;
+    border-top: 1px solid transparent; /* Base da borda */
+    border-image: linear-gradient(to right, transparent, #c88eff, transparent) 1;
+    padding-top: 40px; /* Espaço para a linha não ficar colada nas fotos */
+}
+
+.header-carrossel h2 {
+    font-size: 3rem;
+    letter-spacing: 5px;
+    margin-bottom: 10px;
+    text-shadow: 0 0 15px rgba(138, 43, 226, 0.5);
+}
+
+.carousel-track {
+    display: flex;
+    width: max-content; /* Permite que a trilha cresça conforme adicionamos capas */
+    animation: scrollInfinito 40s linear infinite;
+}
+
+@keyframes scrollInfinito {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        /* O truque: move até metade da lista e volta pro início sem ninguém ver */
+        transform: translateX(-50%);
+    }
+}
+
+/* Container que esconde o que sobra das capas */
+.carousel-container {
+    width: 100%;
+    overflow: hidden;
+    background: #000;
+    padding: 40px 0;
+    
+}
+
+.capa {
+    width: 300px;
+    height: 300px;
+    margin: 0 20px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    overflow: hidden;
+    filter: grayscale(100%) brightness(0.5);
+    transition: 0.5s all ease;
+    border: 2px solid rgba(138, 43, 226, 0.2);
+}
+
+.capa img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Efeito WOW: Quando passa o mouse */
+.capa:hover {
+    filter: grayscale(0%) brightness(1.2);
+    transform: scale(1.1) translateY(-15px);
+    border-color: #8a2be2;
+    box-shadow: 0 0 30px rgba(138, 43, 226, 0.8);
+    z-index: 10;
+}
+
+@keyframes scrollInfinito {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); } 
+}
+/* Classe que o JS vai colocar para parar o carrossel */
+.paused-track {
+    animation-play-state: paused !important;
+}
+
+/* Feedback visual: a capa ativa ganha um brilho constante */
+.capa.active {
+    filter: grayscale(0%) brightness(1.2);
+    border-color: #00eeff; /* Verde para indicar que está tocando */
+    box-shadow: 0 0 30px rgba(0, 238, 255, 0.6);
+    transform: scale(1.1);
+}
+/* Estilo base do título */
+.glitch {
+    position: relative;
+    font-size: 4rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: #fff;
+    letter-spacing: 5px;
+}
+
+/* Criando as camadas "fantasma" (as que tremem) */
+.glitch::before,
+.glitch::after {
+    content: attr(data-text); /* Pega o texto do HTML */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Camada Roxa */
+.glitch::before {
+    left: 2px;
+    text-shadow: -2px 0 #8a2be2;
+    clip: rect(44px, 450px, 56px, 0); /* Mostra só uma "fatia" do texto */
+    animation: glitch-anim 5s infinite linear alternate-reverse;
+}
+
+/* Camada Ciano (Azul) */
+.glitch::after {
+    left: -2px;
+    text-shadow: -2px 0 #00ffff;
+    clip: rect(44px, 450px, 56px, 0);
+    animation: glitch-anim2 1s infinite linear alternate-reverse;
+}
+
+/* A animação que faz as fatias pularem de lugar */
+@keyframes glitch-anim {
+    0% { clip: rect(31px, 9999px, 94px, 0); }
+    20% { clip: rect(89px, 9999px, 98px, 0); }
+    40% { clip: rect(15px, 9999px, 42px, 0); }
+    60% { clip: rect(61px, 9999px, 67px, 0); }
+    80% { clip: rect(10px, 9999px, 88px, 0); }
+    100% { clip: rect(56px, 9999px, 30px, 0); }
+}
+
+@keyframes glitch-anim2 {
+    0% { clip: rect(65px, 9999px, 100px, 0); }
+    100% { clip: rect(10px, 9999px, 50px, 0); }
+}
+/* Esconde o cursor padrão em todo o site */
+html, body {
+    cursor: none;
+}
+
+/* O pontinho central */
+.cursor-dot {
+    width: 5px;
+    height: 5px;
+    background-color: #8a2be2;
+    border-radius: 50%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+/* O círculo que persegue */
+.cursor-outline {
+    width: 30px;
+    height: 30px;
+    border: 2px solid #8a2be2;
+    border-radius: 50%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 9998;
+    transition: transform 0.15s ease-out, width 0.3s, height 0.3s;
+    box-shadow: 0 0 15px rgba(138, 43, 226, 0.5);
+}
+
+/* Efeito ao passar sobre algo clicável (Links e Capas) */
+.cursor-hover {
+    width: 60px;
+    height: 60px;
+    background-color: rgba(138, 43, 226, 0.1);
+    border-color: #00eeffff; /* Muda para verde no hover */
+}
+.footer-section {
+    background: linear-gradient(to top, #050505, #000);
+    padding: 10px 5% 40px;
+    text-align: center;
+    border-top: 1px solid transparent; /* Base da borda */
+    border-image: linear-gradient(to right, transparent, #c88eff, transparent) 1;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    margin: 50px 0;
+    flex-wrap: wrap;
+}
+
+.social-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: #fff;
+    transition: 0.4s;
+    opacity: 0.6;
+}
+
+.social-item img {
+    width: 40px;
+    margin-bottom: 10px;
+}
+
+.social-item span {
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+    font-weight: bold;
+}
+
+.social-item:hover {
+    opacity: 1;
+    transform: translateY(-10px);
+    filter: drop-shadow(0 0 10px #8a2be2);
+}
+
+.footer-credits {
+    margin-top: 80px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding-top: 20px;
+}
+
+.footer-credits p {
+    color: rgba(255, 255, 255, 0.3); /* Mais legível, mas ainda discreto */
+}
+
+.footer-credits .highlight {
+    color: #8a2be2;
+    font-weight: bold;
+}
+.producao-section {
+    padding: 10px 5%;
+    background: #000;
+    text-align: center;
+    border-top: 1px solid transparent; /* Base da borda */
+    border-image: linear-gradient(to right, transparent, #c88eff, transparent) 1;
+    padding-top: 50px; /* Espaço para a linha não ficar colada nas fotos */
+}
+
+.prod-desc {
+    color: #888;
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 20px auto;
+    letter-spacing: 1px;
+    font-family: 'Courier New', monospace;
+}
+
+.prod-desc span { color: #8a2be2; font-weight: bold; }
+
+.prod-tags {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.prod-tags span {
+    font-size: 0.7rem;
+    border: 1px solid #333;
+    padding: 5px 15px;
+    border-radius: 20px;
+    color: #555;
+    transition: 0.3s;
+}
+
+.prod-tags span:hover {
+    border-color: #8a2be2;
+    color: #fff;
+    box-shadow: 0 0 10px rgba(138, 43, 226, 0.3);
+}
+.producao-section {
+    padding: 500px 5%;
+    background: linear-gradient(180deg, #000 0%, #080808 100%);
+    text-align: center;
+}
+
+.prod-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 60px auto;
+}
+
+.prod-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(138, 43, 226, 0.1);
+    padding: 40px 20px;
+    border-radius: 15px;
+    transition: 0.4s all ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.prod-card:hover {
+    background: rgba(138, 43, 226, 0.05);
+    border-color: #8a2be2;
+    transform: translateY(-10px);
+    box-shadow: 0 10px 40px rgba(138, 43, 226, 0.2);
+}
+
+.active-card {
+    border-color: #00eeff !important;
+    box-shadow: 0 0 20px rgba(0, 238, 255, 0.1);
+}
+
+.card-icon {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.prod-card h3 {
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+    color: #fff;
+}
+
+.prod-card p {
+    font-size: 0.85rem;
+    color: #777;
+    line-height: 1.6;
+}
+
+/* Botão de Chamada para Ação */
+.btn-prod-call {
+    display: inline-block;
+    background: #8a2be2;
+    color: #fff;
+    text-decoration: none;
+    padding: 20px 40px;
+    border-radius: 50px;
+    font-weight: 900;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    transition: 0.3s;
+    margin-top: 40px;
+    box-shadow: 0 0 20px rgba(138, 43, 226, 0.4);
+}
+
+.btn-prod-call:hover {
+    transform: scale(1.05);
+    background: #00eeff;
+    color: #000;
+    box-shadow: 0 0 30px rgba(0, 238, 255, 0.6);
+}
+.mute-control {
+    position: absolute;
+    top: 15px;      /* Distância do topo do vídeo */
+    left: 15px;     /* Distância da esquerda do vídeo */
+    z-index: 100;   /* Garante que fique na frente de TUDO */
+    background: rgba(0, 238, 238, 0.6); /* Fundo ciano semi-transparente */
+    border: none;
+    padding: 8px;
+    border-radius: 4px; /* Formato quadradinho igual da imagem */
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+}
+
+.mute-control:hover {
+    background: rgba(0, 238, 238, 1);
+    transform: scale(1.1);
+}
+
+.mute-control img {
+    width: 20px;
+    height: 20px;
+    filter: invert(0); /* Ajuste se o ícone for preto ou branco */
+}
+/* Correção do Layout do Teaser */
+/* ============================================================
+   CORREÇÃO FINAL: TEASER COM GLOW E POSICIONAMENTO LATERAL
+   ============================================================ */
+
+.teaser-audiovisual {
+    padding: 70px 15%; /* Aumentei de 5% para 15% para empurrar tudo mais para o centro */
+    background: #000;
+    display: flex;
+    justify-content: center; /* Garante que o conjunto wrapper esteja centralizado */
+    border-top: 1px solid transparent; /* Base da borda */
+    border-image: linear-gradient(to right, transparent, #c88eff, transparent) 1;
+    padding-top: 100px; /* Espaço para a linha não ficar colada nas fotos */
+}
+
+.teaser-wrapper {
+    display: flex;
+    flex-direction: row; /* GARANTE LADO A LADO NO PC */
+    align-items: center;
+    justify-content: center; /* Centraliza o vídeo e o texto entre si */
+    gap: 100px; 
+    max-width: 1100px; /* Reduzi um pouco para o conjunto não ficar espalhado demais */
+    width: 100%;
+}
+
+/* O MONITOR COM EFEITOS DE ILUMINAÇÃO (GLOW) */
+.video-monitor {
+    position: relative;
+    width: 320px;
+    height: 570px;
+    border: 4px solid #1a1a1a;
+    border-radius: 20px;
+    background: #000;
+    flex-shrink: 0;
+    
+    /* 1. BRILHO QUE VAZA PARA TRÁS (AURA ROXA) */
+    /* Note o -30px para o brilho expandir mais para a esquerda/fora */
+    box-shadow: 
+        -30px 0 60px rgba(138, 43, 226, 0.4), 
+        0 0 100px rgba(138, 43, 226, 0.15);
+    
+    animation: monitor-glow 4s infinite alternate;
+    z-index: 5;
+}
+
+@keyframes monitor-glow {
+    from { box-shadow: -20px 0 50px rgba(138, 43, 226, 0.3); }
+    to { box-shadow: -40px 0 80px rgba(138, 43, 226, 0.6); }
+}
+
+/* 2. SCANLINES (EFEITO DENTRO DO VÍDEO) */
+.scanlines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        rgba(18, 16, 16, 0) 50%, 
+        rgba(0, 0, 0, 0.2) 50%
+    );
+    background-size: 100% 4px;
+    z-index: 2;
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+/* 3. VINHETA INTERNA */
+.video-monitor::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle, transparent 40%, rgba(0,0,0,0.7) 150%);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.reel-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* REC PISCANDO */
+.monitor-rec {
+    position: absolute;
+    top: 25px;
+    left: 25px;
+    color: #ff0000;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    font-weight: bold;
+    z-index: 10;
+    text-shadow: 0 0 10px #ff0000;
+    animation: blink 1s infinite;
+}
+
+/* TEXTO LATERAL */
+.teaser-info {
+    max-width: 500px;
+    text-align: left;
+}
+
+.status-blink { 
+    color: #8a2be2; 
+    letter-spacing: 5px; 
+    font-size: 0.8rem; 
+    margin-bottom: 15px; 
+    display: block;
+}
+
+.teaser-info h2 {
+    font-size: 3.5rem;
+    line-height: 0.9;
+    margin-bottom: 20px;
+}
+
+.teaser-info p { 
+    color: #888; 
+    font-family: 'Courier New', monospace; 
+    line-height: 1.6; 
+    margin: 20px 0; 
+}
+
+.teaser-info p span { color: #8a2be2; font-weight: bold; }
+
+/* Botão do Teaser */
+.btn-teaser {
+    display: inline-block;
+    padding: 15px 40px;
+    border: 1px solid #8a2be2;
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    letter-spacing: 2px;
+    transition: 0.4s;
+    background: transparent;
+}
+
+.btn-teaser:hover { 
+    background: #8a2be2; 
+    box-shadow: 0 0 30px rgba(138, 43, 226, 0.6); 
+    transform: translateY(-5px);
+}
+
+/* Título com efeito de impacto */
+.glitch-title {
+    font-size: clamp(3rem, 8vw, 5rem);
+    font-weight: 900;
+    line-height: 0.85;
+    margin-bottom: 30px;
+    letter-spacing: -2px;
+    text-transform: uppercase;
+}
+
+.live-tag {
+    color: #8a2be2;
+    font-size: 0.6em;
+    padding-left: 10px;
+    text-shadow: 0 0 20px rgba(138, 43, 226, 0.8);
+}
+
+/* Seção de Participações Especialmente Estilizada */
+.featured-colabs {
+    margin-bottom: 30px;
+    border-left: 3px solid #8a2be2;
+    padding-left: 20px;
+}
+
+.colab-label {
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+    color: #555 !important;
+    margin-bottom: 10px !important;
+}
+
+.tags-row {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.tag-name {
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    color: #fff;
+    background: rgba(138, 43, 226, 0.1);
+    padding: 5px 12px;
+    border-radius: 4px;
+    border: 1px solid rgba(138, 43, 226, 0.3);
+    transition: 0.3s;
+}
+
+.tag-name:hover {
+    background: #8a2be2;
+    color: #000;
+    font-weight: bold;
+    transform: translateY(-3px);
+}
+
+/* Grupo de Botões Dinâmico */
+.action-group {
+    display: flex;
+    gap: 20px;
+    margin-top: 40px;
+}
+
+.main-btn {
+    background: #8a2be2 !important;
+    border: none !important;
+    padding: 18px 45px !important;
+}
+
+.secondary-btn {
+    border: 1px solid #333 !important;
+    color: #888 !important;
+}
+
+.secondary-btn:hover {
+    border-color: #fff !important;
+    color: #fff !important;
+}
+.social-links-minimal {
+    display: flex;
+    justify-content: center;
+    gap: 80px; /* Espaço elegante entre eles */
+    margin-top: 40px;
+}
+
+.social-item-new {
+    text-decoration: none;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    opacity: 0.6;
+    transition: 0.4s ease;
+}
+
+.social-item-new img {
+    width: 35px; /* Tamanho discreto e profissional */
+}
+
+.social-item-new span {
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+    font-weight: bold;
+}
+
+/* O efeito que falta na imagem 8512cb: */
+.social-item-new:hover {
+    opacity: 1;
+    transform: translateY(-8px);
+    filter: drop-shadow(0 0 10px #8a2be2); /* Brilho roxo ao tocar */
+}
+.indie-label {
+    font-size: 0.6rem;
+    letter-spacing: 3px;
+    color: rgba(255, 255, 255, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 4px 10px;
+    display: inline-block;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+/* --- AJUSTE BIO (LADO A LADO NO PC) --- */
+.bio-container {
+    display: flex;
+    flex-direction: row; /* GARANTE LADO A LADO NO PC */
+    align-items: center;
+    justify-content: center;
+    gap: 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+    border-top: 1px solid transparent; 
+    border-image: linear-gradient(to right, transparent, #c88eff, transparent) 1;
+    padding-top: 100px; /* Isso cria o espaço necessário entre as fotos e o texto */
+    padding-bottom: 100px;
+    
+}
+
+.bio-text-justified {
+    font-family: 'Courier New', monospace;
+    line-height: 1.8;
+    color: #bbb;
+    font-size: 1.05rem;
+    margin-bottom: 25px;
+    max-width: 600px;
+    text-align: justify;
+    hyphens: auto;
+}
+
+/* --- MONITOR CIANO COM EFEITOS --- */
+.video-monitor-cyan {
+    position: relative; /* Essencial para o botão não fugir */
+    width: 380px;
+    height: 550px;
+    flex-shrink: 0;
+    border: 2px solid #00eeee;
+    border-radius: 8px;
+    background: #000;
+    overflow: hidden;
+    box-shadow: 0 0 40px rgba(0, 238, 238, 0.2);
+    z-index: 1; /* Cria um novo contexto de empilhamento */
+}
+
+/* Efeito de Listras (Scanlines) */
+.video-scanlines {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+    background-size: 100% 4px; /* Tamanho das listras */
+    z-index: 3;
+    pointer-events: none;
+}
+
+.video-inner-glow {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    box-shadow: inset 0 0 50px rgba(0, 238, 238, 0.3);
+    z-index: 4;
+    pointer-events: none;
+}
+
+.video-status-cyan {
+    position: absolute;
+    top: 15px; left: 15px;
+    z-index: 10;
+    color: #00eeee;
+    font-size: 0.6rem;
+    font-family: monospace;
+    letter-spacing: 2px;
+    text-shadow: 0 0 5px #00eeee;
+}
+
+/* --- RESPONSIVIDADE CELULAR (SÓ AQUI ELES EMPILHAM) --- */
+@media (max-width: 900px) {
+    .teaser-wrapper, .bio-container { 
+        flex-direction: column !important; 
+        text-align: center;
+        gap: 40px; 
+    }
+    .teaser-info, .bio-text-justified { text-align: center; }
+    .video-monitor, .video-monitor-cyan {
+        width: 300px;
+        height: 530px;
+    }
+}
+/* Garante que as seções respeitem a altura da Navbar e tenham respiro */
+.bio-container, .agenda-container, .producao-section, .teaser-audiovisual {
+    padding-top: 40px !important;
+    padding-bottom: 100px !important;
+}
+.video-monitor-cyan video, .reel-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+/* === CORREÇÃO DEFINITIVA DO BOTÃO DE MUTE (BIO) === */
+
+.bio-cover-video {
+  pointer-events: none; /* vídeo não bloqueia clique */
+  position: relative;
+  z-index: 1;
+}
+
+.mute-btn-mini {
+    position: absolute;
+    bottom: 15px;        /* ⬇ vai pra baixo */
+    right: 15px;         /* canto inferior direito */
+
+    width: 42px;
+    height: 42px;
+    padding: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(0, 238, 238, 0.7);
+    border: none;
+    border-radius: 50%;  /* 🔴 redondo */
+
+    cursor: pointer;
+    z-index: 20;
+
+    box-shadow: 0 0 12px rgba(0, 238, 238, 0.8);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.mute-btn-mini:hover {
+    transform: scale(1.12);
+    box-shadow: 0 0 20px rgba(0, 238, 238, 1);
+}
+
+.mute-btn-mini img {
+    width: 18px;
+    height: 18px;
+}
+.video-monitor button {
+  position: absolute;
+  bottom: 15px;      /* fica embaixo */
+  right: 15px;
+
+  top: auto;         /* remove topo */
+  left: auto;
+
+  width: 42px;
+  height: 42px;
+  padding: 0;
+
+  border-radius: 50%;   /* 🔴 redondo */
+  border: none;
+
+  background: rgba(0, 212, 255, 0.8); /* azul da imagem */
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 20;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.video-monitor button:hover {
+  transform: scale(1.15);
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.8);
+}
+
+.video-monitor button img {
+  width: 18px;
+  height: 18px;
+}
+.musica-referencia {
+    font-style: italic;      /* Coloca em itálico */
+    font-size: 0.85rem;      /* Diminui o tamanho (ajuste conforme o gosto) */
+    opacity: 0.8;            /* Deixa levemente mais discreto/claro */
+    display: block;          /* Garante que ele se comporte como uma linha própria */
+    margin-top: 10px;        /* Dá um espacinho do texto de cima */
+    color: #8a2be2;          /* Opcional: coloca no roxo padrão do site */
+}
+/* O bloco que cria a linha lateral roxa */
+.bio-text-wrapper {
+    border-left: 3px solid #8a2be2; /* Linha roxa */
+    padding-left: 25px;            /* Espaço entre a linha e o texto */
+    margin: 30px 0;                /* Espaço entre o título e a assinatura */
+}
+
+/* O estilo específico para o crédito da música */
+.musica-referencia {
+    font-style: italic;
+    font-size: 0.85rem;            /* Menor que o texto principal */
+    opacity: 0.7;                  /* Levemente mais claro */
+    display: block;                /* Ocupa a linha toda */
+    margin-top: 15px;              /* Separa do parágrafo de cima */
+    color: #8a2be2;                /* No mesmo roxo da linha */
+    font-family: 'Courier New', monospace;
+}
+
+/* Garante que o texto principal da bio esteja justificado */
+.bio-text-justified {
+    text-align: justify;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+.ficha-tecnica {
+    margin-top: 0px;
+    font-family: 'Courier New', monospace;
+}
+
+.category-title {
+    display: block;
+    color: #8a2be2;
+    font-size: 0.7rem;
+    font-weight: bold;
+    margin-bottom: 12px;
+    border-bottom: 1px solid rgba(138, 43, 226, 0.3);
+    padding-bottom: 4px;
+}
+
+.ficha-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr 1fr; /* Ajuste leve nas larguras */
+    gap: 40px; /* Aumentamos de 20px para 40px para dar ar ao layout */
+    margin: 10px 0; /* Espaço maior acima e abaixo da ficha */
+}
+
+.ficha-item {
+    margin-bottom: 12px; /* Mais espaço entre um profissional e outro */
+}
+
+.ficha-item .label {
+    margin-bottom: 2px;
+    letter-spacing: 1.5px; /* Deixa o cargo mais legível */
+    text-transform: uppercase;
+}
+
+.ficha-item .value {
+    font-size: 0.8rem;
+    line-height: 1.4; /* Melhora a leitura */
+}
+.category-title {
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    margin-bottom: 20px; /* Mais espaço antes de começar a lista de nomes */
+    color: #c88eff; /* Um roxo levemente mais claro para brilhar */
+    border-bottom: 1px solid rgba(200, 142, 255, 0.2);
+    padding-bottom: 8px;
+}
+/* Container Principal */
+.tech-specs-container {
+    margin: 25px 0;
+    font-family: 'Courier New', monospace;
+    background: rgba(138, 43, 226, 0.03); /* Fundo roxo quase invisível */
+    padding: 20px;
+    border-left: 2px solid #8a2be2;
+    border-radius: 0 4px 4px 0;
+}
+
+.main-credit {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.specs-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Apenas 2 colunas para o texto respirar */
+    gap: 30px;
+}
+
+.group-header {
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+    color: #8a2be2;
+    margin-bottom: 15px;
+    font-weight: bold;
+    opacity: 0.8;
+}
+
+.spec-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    margin-bottom: 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding-bottom: 4px;
+}
+
+.spec-item span {
+    color: rgba(255, 255, 255, 0.4); /* Label bem discreta */
+    font-size: 0.65rem;
+}
+
+.spec-item strong {
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: normal;
+}
+
+/* Ajuste do Vídeo para não ficar desproporcional */
+.teaser-container {
+    display: flex;
+    align-items: stretch; /* Faz o vídeo "tentar" ter a mesma altura do texto */
+    gap: 60px;
+}
+.btn-instagram {
+    display: inline-block;
+    background-color: #8a2be2;      /* Fundo transparente igual ao Bastidores */
+    color: white;                       /* Texto branco */
+    padding: 4px 12px;                  /* Espaçamento interno elegante */
+    text-decoration: none;
+    font-family: 'Inter', sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    border: 1px solid #8a2be2;            /* Borda fina igual ao design original */
+    border-radius: 40px;                 /* Cantos levemente arredondados */
+    transition: all 0.3s ease;
+    
+    /* AJUSTES DE TAMANHO */
+    font-size: 0.7rem;                  /* Diminui a fonte conforme solicitado */
+    margin-top: 1px;                    /* Espaçamento superior */
+    letter-spacing: 1px;                /* Espaçamento entre letras profissional */
+}
+
+.btn-instagram:hover {
+    background-color: white;            /* Inverte a cor ao passar o mouse */
+    color: black;                       /* Texto fica preto para contraste */
+    transform: scale(1.05);
+}
+
